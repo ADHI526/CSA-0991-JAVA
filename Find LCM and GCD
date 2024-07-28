@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class LcmGcdCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of values: ");
+        int n = scanner.nextInt();
+
+        int gcd = 0;
+        long lcm = 1; // Use long to avoid overflow
+
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Enter Number " + i + ": ");
+            int num = scanner.nextInt();
+
+            gcd = calculateGCD(gcd, num);
+
+            lcm = calculateLCM(lcm, num);
+        }
+
+        System.out.println("LCM = " + lcm);
+        System.out.println("GCD = " + gcd);
+    }
+
+    private static int calculateGCD(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return calculateGCD(b, a % b);
+    }
+
+    private static long calculateLCM(long a, int b) {
+        return (a * b) / calculateGCD((int) a, b);
+    }
+}
