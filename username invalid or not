@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class UsernameValidator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Reenter the username: ");
+        String reenteredUsername = scanner.nextLine();
+
+        if (isValidUsername(username, reenteredUsername)) {
+            System.out.println("Username is valid.");
+        } else {
+            System.out.println("Username is invalid.");
+        }
+    }
+
+    private static boolean isValidUsername(String username, String reenteredUsername) {
+    
+        if (!username.equals(reenteredUsername)) {
+            return false;
+        }
+
+        if (username.length() < 8) {
+            return false;
+        }
+
+        char firstChar = username.charAt(0);
+        if (!Character.isLetter(firstChar)) {
+            return false;
+        }
+
+        for (char ch : username.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch) && ch != '@' && ch != '_' && ch != '.') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
